@@ -44,7 +44,7 @@ algoritmos-probabilisticos/
     └── main.py                   # Las Vegas + backtracking comparison
 ---
 
-## Prerequisites
+Prerequisites
 
 Python 3.10+ (for the Python projects)
 
@@ -59,69 +59,52 @@ You can also create a requirements.txt with these libraries and run:
 
 pip install -r requirements.txt
 
-
 How to Use
-
 Clone the repository
-
 git clone https://github.com/<your-user>/algoritmos-probabilisticos.git
 cd algoritmos-probabilisticos
 
-
 (Optional) Create and activate a virtual environment
-
 python -m venv .venv
 # Windows
 .venv\Scripts\activate
 # Linux / macOS
 source .venv/bin/activate
 
-
 Install the Python dependencies
-
 pip install numpy pandas matplotlib statsmodels yfinance
 
-
 Run each project
-
 Petrobras time series (MMS15)
-
 cd petrobras_mms15
 python kkr.py
 
-
 Lotofácil forecaster
-
 cd lotofacil_forecaster
 python lotofacil_forecaster.py \
   --xlsx loto_facil_asloterias_ate_concurso_3199_sorteio.xlsx
 
-
 Mega-Sena forecaster (C)
-
 cd mega_sena_forecaster
 gcc -O2 -o megasena_forecaster main.c -lm
 ./megasena_forecaster --csv mega_sena_asloterias_ate_concurso_2776_sorteio.csv
 
-
 Nash Equilibrium in Pure Strategies (ENEP)
-
 cd nash_enep
 python main.py
 
-
 Las Vegas – N Queens
-
 cd las_vegas_8_rainhas
 python main.py --n 8 --lv_runs 1000
 
 Logic Behind the Projects
-
 Stock time series (Petrobras – MMS15)
+
 Uses daily prices of Petrobras stock from 2008–2015 to build a time series and compute a 15-day Simple Moving Average.
 This illustrates trend detection, noise smoothing and the basic idea of using moving averages for financial analysis.
 
 Lottery forecasters (Lotofácil & Mega-Sena)
+
 For each lottery, the historical draws are transformed into binary time series (one series per number).
 For every number the scripts compute:
 
@@ -135,15 +118,17 @@ These components are combined into a heuristic score to generate suggested games
 The goal is to practice probabilistic and time-series tools, not to “beat” the lottery.
 
 Nash Equilibrium in Pure Strategies (Game Theory)
+
 The ENEP script takes a bi-matrix game and finds cells where:
 
-the payoff of the row player is maximal in that column;
+the payoff of the row player is maximal in that column; and
 
-and the payoff of the column player is maximal in that row.
+the payoff of the column player is maximal in that row.
 
 Such cells are pure-strategy Nash equilibria, matching the theoretical definition from the course.
 
 Las Vegas algorithm for N Queens
+
 Compares:
 
 a Las Vegas algorithm that keeps sampling random board configurations until it finds a valid solution;
@@ -159,5 +144,3 @@ Lottery data and stock price series are used for academic purposes only.
 Forecasts and suggested games do not provide any guarantee of financial gain or lottery winnings.
 
 Some input datasets (spreadsheets/CSVs) may be partially truncated to avoid versioning sensitive or heavy files.
-
-Use this repository as a learning toolkit for probabilistic algorithms, experimentation and visualization.
