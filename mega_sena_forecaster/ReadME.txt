@@ -1,0 +1,1 @@
+Professor, ainda estou com aquele problema no meu office 360. Fiz o programa em C, me arrependi depois que eu comecei. Comecei a fazer na semana passada, estava tendo um problema na função que é resposanvel pela leitura do csv.. depois, descobri que o problema era pq eu estava tentando fazer a leitura do arquivo .xls e n .csv....... depois de 4 dias esta tudo certo e rodando. 
