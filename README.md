@@ -58,3 +58,59 @@ pip install numpy pandas matplotlib statsmodels yfinance
 You can also create a requirements.txt with these libraries and run:
 
 pip install -r requirements.txt
+
+
+How to Use
+
+Clone the repository
+
+git clone https://github.com/<your-user>/algoritmos-probabilisticos.git
+cd algoritmos-probabilisticos
+
+
+(Optional) Create and activate a virtual environment
+
+python -m venv .venv
+# Windows
+.venv\Scripts\activate
+# Linux / macOS
+source .venv/bin/activate
+
+
+Install the Python dependencies
+
+pip install numpy pandas matplotlib statsmodels yfinance
+
+
+Run each project
+
+Petrobras time series (MMS15)
+
+cd petrobras_mms15
+python kkr.py
+
+
+Lotofácil forecaster
+
+cd lotofacil_forecaster
+python lotofacil_forecaster.py \
+  --xlsx loto_facil_asloterias_ate_concurso_3199_sorteio.xlsx
+
+
+Mega-Sena forecaster (C)
+
+cd mega_sena_forecaster
+gcc -O2 -o megasena_forecaster main.c -lm
+./megasena_forecaster --csv mega_sena_asloterias_ate_concurso_2776_sorteio.csv
+
+
+Nash Equilibrium in Pure Strategies (ENEP)
+
+cd nash_enep
+python main.py
+
+
+Las Vegas – N Queens
+
+cd las_vegas_8_rainhas
+python main.py --n 8 --lv_runs 1000
