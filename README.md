@@ -42,8 +42,9 @@ algoritmos-probabilisticos/
 │   └── main.py                   # 2-player bi-matrix ENEP search
 └── las_vegas_8_rainhas/          # Las Vegas algorithm for N-Queens
     └── main.py                   # Las Vegas + backtracking comparison
+---
 
-Prerequisites
+## Prerequisites
 
 Python 3.10+ (for the Python projects)
 
