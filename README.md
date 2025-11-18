@@ -24,7 +24,7 @@ Each folder corresponds to a classroom assignment, implemented as a small, self-
 
 ## Structure
 
-```text
+```
 algoritmos-probabilisticos/
 ├── aulas/                        # Course slides (Aula 01–13)
 ├── petrobras_mms15/              # Time series analysis of Petrobras stock
@@ -42,105 +42,128 @@ algoritmos-probabilisticos/
 │   └── main.py                   # 2-player bi-matrix ENEP search
 └── las_vegas_8_rainhas/          # Las Vegas algorithm for N-Queens
     └── main.py                   # Las Vegas + backtracking comparison
----
+```
+## Prerequisites
 
-Prerequisites
-
-Python 3.10+ (for the Python projects)
-
-GCC or another C compiler (for the Mega-Sena project, if you want to build from source)
+- **Python 3.10+** (for the Python projects)  
+- **GCC or another C compiler** (for the Mega-Sena project, if you want to build from source)
 
 Required Python packages (for all Python projects):
 
+```bash
 pip install numpy pandas matplotlib statsmodels yfinance
+```
+Some input datasets (spreadsheets/CSVs) may be partially truncated to avoid versioning sensitive or heavy files.
 
+## How to Use
 
-You can also create a requirements.txt with these libraries and run:
+### Clone the repository
 
-pip install -r requirements.txt
-
-How to Use
-Clone the repository
+```bash
 git clone https://github.com/<your-user>/algoritmos-probabilisticos.git
 cd algoritmos-probabilisticos
-
-(Optional) Create and activate a virtual environment
-python -m venv .venv
-# Windows
-.venv\Scripts\activate
-# Linux / macOS
-source .venv/bin/activate
-
-Install the Python dependencies
-pip install numpy pandas matplotlib statsmodels yfinance
-
-Run each project
-Petrobras time series (MMS15)
+```
+---
+## Run each project
+---
+### Petrobras time series (MMS15)
+```bash
 cd petrobras_mms15
 python kkr.py
-
-Lotofácil forecaster
+```
+### Lotofácil forecaster
+```bash
 cd lotofacil_forecaster
 python lotofacil_forecaster.py \
   --xlsx loto_facil_asloterias_ate_concurso_3199_sorteio.xlsx
-
-Mega-Sena forecaster (C)
+  ```
+### Mega-Sena forecaster (C)
+```bash
 cd mega_sena_forecaster
 gcc -O2 -o megasena_forecaster main.c -lm
 ./megasena_forecaster --csv mega_sena_asloterias_ate_concurso_2776_sorteio.csv
+```
+### Nash Equilibrium in Pure Strategies (ENEP)
 
-Nash Equilibrium in Pure Strategies (ENEP)
 cd nash_enep
 python main.py
 
-Las Vegas – N Queens
+### Las Vegas – N Queens
+```bash
 cd las_vegas_8_rainhas
 python main.py --n 8 --lv_runs 1000
+```
 
-Logic Behind the Projects
-Stock time series (Petrobras – MMS15)
+---
 
-Uses daily prices of Petrobras stock from 2008–2015 to build a time series and compute a 15-day Simple Moving Average.
-This illustrates trend detection, noise smoothing and the basic idea of using moving averages for financial analysis.
+# Logic Behind the Projects
+### Stock time series (Petrobras – MMS15)
 
-Lottery forecasters (Lotofácil & Mega-Sena)
+Uses daily prices of Petrobras stock from 2008–2015 to build a time series and compute a 15-day Simple Moving Average (SMA).
+Illustrates trend detection, noise smoothing, and the basic idea of using moving averages for financial analysis.
 
+---
+
+### Lottery forecasters (Lotofácil & Mega-Sena)
+
+---
 For each lottery, the historical draws are transformed into binary time series (one series per number).
-For every number the scripts compute:
+For every number, the scripts compute:
 
-historical frequency;
+- historical frequency
 
-recent trend via moving average;
+- recent trend via moving average
 
-a simple AR(1) autoregressive forecast.
+- a simple AR(1) autoregressive forecast
 
 These components are combined into a heuristic score to generate suggested games and visualizations.
 The goal is to practice probabilistic and time-series tools, not to “beat” the lottery.
 
-Nash Equilibrium in Pure Strategies (Game Theory)
+---
 
+### Nash Equilibrium in Pure Strategies (Game Theory) 
+
+---
 The ENEP script takes a bi-matrix game and finds cells where:
 
-the payoff of the row player is maximal in that column; and
+- the payoff of the row player is maximal in that column; and
 
-the payoff of the column player is maximal in that row.
+- the payoff of the column player is maximal in that row.
 
-Such cells are pure-strategy Nash equilibria, matching the theoretical definition from the course.
+These cells are pure-strategy Nash equilibria, matching the theoretical definition from the course.
 
-Las Vegas algorithm for N Queens
+---
+
+### Las Vegas algorithm for N Queens
+
 
 Compares:
 
-a Las Vegas algorithm that keeps sampling random board configurations until it finds a valid solution;
+- a Las Vegas algorithm that keeps sampling random board configurations until it finds a valid solution;
 
-a deterministic backtracking solver.
+- a deterministic backtracking solver.
 
-This illustrates the difference between Monte Carlo and Las Vegas algorithms in terms of correctness vs. runtime randomness.
+This shows the difference between Monte Carlo and Las Vegas algorithms in terms of correctness vs. runtime randomness.
 
-Important Note
 
-Lottery data and stock price series are used for academic purposes only.
 
-Forecasts and suggested games do not provide any guarantee of financial gain or lottery winnings.
 
-Some input datasets (spreadsheets/CSVs) may be partially truncated to avoid versioning sensitive or heavy files.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
