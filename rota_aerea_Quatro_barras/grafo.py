@@ -41,7 +41,7 @@ GRAFO = {
         ("Rio de Janeiro", 7000),
     ],
     "Rio de Janeiro": [
-        ("Boca Raton", 8000),
+        ("Boca Raton", 5000),
     ],
     "Boca Raton": []
 }
@@ -50,45 +50,75 @@ MAX_ALCANCE = 5000
 MAX_PARADAS = 7
 MAX_CUSTO = 15000
 
-def buscar_rota_las_vegas(origem, destino, grafo=GRAFO,
-                          max_paradas=MAX_PARADAS,
-                          max_custo=MAX_CUSTO,
-                          max_alcance=MAX_ALCANCE,
-                          seed=None):
-    if seed is not None:
-        random.seed(seed)
+def buscar_rota_las_vegas(origem, destino, max_tentativas=100000):
+    tentativas = 0
 
     while True:
+        tentativas += 1
+        if tentativas % 1000 == 0:
+            print(f"Tentativa #{tentativas}...")
+
         atual = origem
         caminho = [atual]
         custo_total = 0
         paradas = 0
 
         while True:
-            if atual == destino:
-                if paradas <= max_paradas and custo_total <= max_custo:
-                    return caminho, custo_total, paradas
-                else:
-                    break
+            vizinhos = GRAFO.get(atual, [])
 
-            vizinhos_validos = []
-            for proximo, custo in grafo.get(atual, []):
-                if custo <= max_alcance:
-                    vizinhos_validos.append((proximo, custo))
+            
+            vizinhos_validos = [(v, c) for (v, c) in vizinhos if c <= 5000]
 
             if not vizinhos_validos:
+               
                 break
 
-            proximo, custo = random.choice(vizinhos_validos)
-
-            caminho.append(proximo)
+            prox, custo = random.choice(vizinhos_validos)
+            caminho.append(prox)
             custo_total += custo
             paradas += 1
-            atual = proximo
+            atual = prox
 
-            if paradas > max_paradas or custo_total > max_custo:
+            if atual == destino:
+                
+                if paradas < 7 and custo_total < 15000:
+                    print(f"Achou solução na tentativa #{tentativas}")
+                    return caminho, custo_total, paradas
+                else:
+                    
+                    break
+
+            
+            if paradas >= 7 or custo_total >= 15000:
                 break
 
+        if tentativas >= max_tentativas:
+            print(f"Nenhuma rota encontrada em {max_tentativas} tentativas.")
+            return None, None, None
+## =========TESTES==========#
+
+# def todas_rotas_validas(grafo, origem, destino,
+#                         max_paradas=6, max_custo=15000):
+#     resultados = []
+
+#     def dfs(atual, custo, caminho):
+#         if len(caminho) - 1 > max_paradas:
+#             return
+#         if custo > max_custo:
+#             return
+
+#         if atual == destino:
+#             resultados.append((list(caminho), custo))
+#             return
+
+#         for prox, dist in grafo[atual]:
+#             if prox in caminho:
+#                 continue
+#             dfs(prox, custo + dist, caminho + [prox])
+
+#     dfs(origem, 0, [origem])
+#     return resultados
+## =========T==========#
 
 def main():
     origem = "Quatro Barras"
@@ -96,11 +126,22 @@ def main():
 
     caminho, custo, paradas = buscar_rota_las_vegas(origem, destino)
 
-    print("Rota encontrada (Las Vegas):")
-    print(" -> ".join(caminho))
-    print(f"Paradas: {paradas}")
-    print(f"Custo total: {custo:.0f}")
+    if caminho is None:
+        print("Nenhuma rota que satisfaça as restrições foi encontrada.")
+    else:
+        print("Rota encontrada:")
+        print(" -> ".join(caminho))
+        print(f"Custo total: {custo}")
+        print(f"Paradas: {paradas}")
+    ## =========TESTES==========#
+    # rotas = todas_rotas_validas(GRAFO, origem, destino,
+    #                         max_paradas=6, max_custo=15000)
 
+    # print(f"Qtde de rotas válidas determinísticas: {len(rotas)}")
+    # for cam, custo in rotas[:10]:
+    #     print("Rota:", " -> ".join(cam), "| custo:", custo)
+    ## =========T==========#
 
 if __name__ == "__main__":
     main()
+
